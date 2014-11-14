@@ -2,7 +2,7 @@ package blog
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/lisijie/goblog/models"
+	"github.com/nydw/myblog/models"
 	"os"
 	"strings"
 )
