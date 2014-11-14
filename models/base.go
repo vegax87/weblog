@@ -2,6 +2,7 @@ package models
 
 import (
 	"crypto/md5"
+    "os"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -19,7 +20,11 @@ func Init() {
 	if dbport == "" {
 		dbport = "3306"
 	}
-	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
+
+    oshost := os.Getenv(dbhost)
+	dsn := dbuser + ":" + dbpassword + "@tcp(" + oshost + ":" + dbport + ")/" + dbname + "?charset=utf8"
+
+    fmt.Println(dsn)
 	orm.RegisterDataBase("default", "mysql", dsn)
 	orm.RegisterModel(new(User), new(Post), new(Tag), new(Option), new(TagPost))
 }
