@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export GOPATH=$HOME/workspace/go/myblog
+echo $GOPATH
+go build
