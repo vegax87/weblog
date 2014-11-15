@@ -27,7 +27,6 @@ func Init() {
 
 	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
 
-    fmt.Println(dsn)
 	orm.RegisterDataBase("default", "mysql", dsn)
 	orm.RegisterModel(new(User), new(Post), new(Tag), new(Option), new(TagPost))
 }
