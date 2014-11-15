@@ -12,17 +12,20 @@ import (
 )
 
 func Init() {
-	dbhost := beego.AppConfig.String("dbhost")
-	dbport := beego.AppConfig.String("dbport")
+//	dbhost := beego.AppConfig.String("dbhost")
+//	dbport := beego.AppConfig.String("dbport")
+
+    dbhost := os.Getenv("OPENSHIFT_MYSQL_DB_HOST")
+    dbport := os.Getenv("OPENSHIFT_MYSQL_DB_PORT")
 	dbuser := beego.AppConfig.String("dbuser")
 	dbpassword := beego.AppConfig.String("dbpassword")
 	dbname := beego.AppConfig.String("dbname")
+
 	if dbport == "" {
 		dbport = "3306"
 	}
 
-    oshost := os.Getenv(dbhost)
-	dsn := dbuser + ":" + dbpassword + "@tcp(" + oshost + ":" + dbport + ")/" + dbname + "?charset=utf8"
+	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
 
     fmt.Println(dsn)
 	orm.RegisterDataBase("default", "mysql", dsn)

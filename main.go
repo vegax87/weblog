@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
 	"flag"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -65,6 +66,11 @@ func main() {
 	beego.Router("/admin/user/add", &admin.UserController{}, "*:Add")
 	beego.Router("/admin/user/edit", &admin.UserController{}, "*:Edit")
 	beego.Router("/admin/user/delete", &admin.UserController{}, "*:Delete")
+   
+	ip :=os.Getenv("OPENSHIFT_DIY_IP")
+	port :=os.Getenv("OPENSHIFT_DIY_PORT")
+    addr := fmt.Sprintf("%s:%s", ip, port)
+    fmt.Println(addr)
+	beego.Run(addr)
 
-	beego.Run()
 }
